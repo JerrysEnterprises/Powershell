@@ -1,0 +1,1 @@
+Get-SMBShareAccess -Name 'ShareName' (Double quote if there is a space in the name)
