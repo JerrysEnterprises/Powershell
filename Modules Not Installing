@@ -1,0 +1,33 @@
+Run the following commands to fix
+
+	1. Checks the version - 5.1 only has SSl and TSL 1.0
+
+		Get-Host | Select-Object Version
+
+	2. Checks the security protocols that are being used
+
+		[Net.ServicePointManager]::SecurityProtocol
+
+	3. Sets strong cryptography on 64 bit .net framework
+
+		Set-ItemProperty -Path 'HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NetFramework\v4.0.30319' -Name 'SchUseStrongCrypto' -Value '1' -Type Dword
+
+	4. Sets Strong cryptography on 32 bit .net framework
+
+		Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\.NetFramework\v4.0.30319' -Name 'SchUseStrongCrypto' -Value '1' -Type Dword
+
+	5. Check Security protocols again and you should see tls 1.1 and 1.2 now
+
+		[Net.ServicePointManager]::SecurityProtocol
+
+	6. Installs the NuGet module needed to install other modules
+
+		Install-Module PowershellGet -Force
+
+	7. Now try to install your module again and it should be successful
+
+If you are still having issues with errors stating you do not have permissions to run scripts on this system try the following
+
+		Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
+
+Then try to run your Install-Module again, this will probably have you install the latest version of NuGet as well
