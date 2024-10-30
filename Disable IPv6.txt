@@ -4,3 +4,4 @@ Disable-NetAdapterBinding `
 Get-NetAdapterBinding `
     -Name Ethernet `
     -ComponentID ms_tcpip6
+test
